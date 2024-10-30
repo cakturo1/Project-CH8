@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="shortcut icon"
+      href="{{url_for('static', filename='favico.ico')}}"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      href="{{url_for('static', filename='favico.ico')}}"
+      type="image/x-icon"
+    />
+
+    <title>Error - Word Not Found</title>
+    <link
+      href="{{ url_for('static', filename='mystyle.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="banner" onclick="window.location.href = '/'"></div>
+      <div class="error-wrap">
+        <div class="error-container">
+          <h1 class="error-title">Word Not Found</h1>
+          <p class="error-message">
+            Sorry, the word "{{ keyword }}" could not be found.
+          </p>
+          {% if suggestions %}
+          <div class="suggestions">
+            Did you mean: {% for suggestion in suggestions %}
+            <a href="{{ url_for('detail', keyword=suggestion) }}"
+              >{{ suggestion }}</a
+            >
+            {% if not loop.last %}, {% endif %} {% endfor %}
+          </div>
+          {% endif %}
+          <a href="/" class="back-btn">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
